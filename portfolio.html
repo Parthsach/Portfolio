@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parth Sachdeva — CS Engineering</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0b0c0e;
+    --bg-panel: #131417;
+    --ink: #e7e7e5;
+    --ink-dim: #8b8d93;
+    --ink-faint: #55575c;
+    --accent: #6ee7b7;
+    --accent-dim: #3a8f6e;
+    --rule: #202226;
+    --rule-strong: #2e3036;
+  }
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family:'JetBrains Mono', monospace;
+    font-size: 15.5px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  a{ color: var(--ink); text-decoration:none; }
+  a:focus-visible, button:focus-visible{ outline: 1px solid var(--accent); outline-offset: 3px; }
+  ::selection{ background: var(--accent-dim); color: #0b0c0e; }
+
+  .wrap{ max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+  /* nav */
+  nav.top{
+    position: sticky; top:0; z-index: 10;
+    background: rgba(11,12,14,0.88);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--rule);
+  }
+  nav.top .inner{
+    max-width: 760px; margin:0 auto; padding: 16px 24px;
+    display:flex; justify-content: space-between; align-items:center;
+    flex-wrap: wrap; gap: 10px;
+  }
+  nav.top .brand{ font-size: 13.5px; color: var(--ink); font-weight:600; }
+  nav.top .brand span{ color: var(--accent); }
+  nav.top .links{ display:flex; gap: 18px; flex-wrap: wrap; }
+  nav.top .links a{ font-size: 12.5px; color: var(--ink-dim); }
+  nav.top .links a:hover{ color: var(--accent); }
+
+  /* hero */
+  .hero{ padding: 68px 0 44px 0; }
+  .kicker{ font-size: 12.5px; color: var(--accent); margin: 0 0 18px 0; }
+  .kicker::before{ content:"// "; color: var(--ink-faint); }
+  h1{
+    font-size: clamp(1.7rem, 4.6vw, 2.5rem);
+    line-height: 1.28;
+    margin: 0 0 20px 0;
+    font-weight: 700;
+    max-width: 22ch;
+    color: var(--ink);
+  }
+  h1 .dim{ color: var(--ink-faint); }
+  .lede{ color: var(--ink-dim); max-width: 58ch; margin: 0 0 28px 0; font-size: 14.5px; }
+  .cta-row{ display:flex; gap: 12px; flex-wrap: wrap; }
+  .btn{
+    display:inline-block;
+    font-size: 12.5px;
+    padding: 10px 16px;
+    border: 1px solid var(--rule-strong);
+    color: var(--ink);
+    transition: border-color .15s ease, color .15s ease;
+  }
+  .btn.primary{ border-color: var(--accent-dim); color: var(--accent); }
+  .btn:hover{ border-color: var(--accent); color: var(--accent); }
+
+  /* three cards */
+  .doors{
+    display:grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin: 44px 0 8px 0;
+  }
+  @media (max-width: 640px){ .doors{ grid-template-columns: 1fr; } }
+  .door{ background: var(--bg-panel); padding: 22px 20px; }
+  .door .idx{ color: var(--accent); font-size: 12px; margin-bottom: 10px; }
+  .door h3{ font-size: 14px; margin: 0 0 8px 0; color: var(--ink); }
+  .door p{ font-size: 12.5px; color: var(--ink-dim); margin: 0; line-height: 1.6; }
+
+  /* sections */
+  .section{ padding: 60px 0; border-top: 1px solid var(--rule); }
+  .section-head{ display:flex; align-items:baseline; gap: 12px; margin-bottom: 30px; }
+  .section-head .num{ color: var(--accent); font-size: 12.5px; }
+  .section-head h2{ font-size: 1.1rem; margin: 0; color: var(--ink); }
+  .section-head .count{ color: var(--ink-faint); font-size: 12px; margin-left: auto; }
+
+  /* education */
+  .row{ display:flex; justify-content: space-between; gap: 18px; padding: 14px 0; border-bottom: 1px solid var(--rule); }
+  .row:first-child{ padding-top:0; }
+  .row:last-child{ border-bottom:none; padding-bottom:0; }
+  .row .main{ font-size: 14px; color: var(--ink); }
+  .row .sub{ font-size: 12.5px; color: var(--ink-dim); margin-top: 3px; }
+  .row .when{ font-size: 12px; color: var(--ink-faint); white-space:nowrap; text-align:right; }
+
+  /* skills grid */
+  .skillgrid{ display:grid; grid-template-columns: 1fr 1fr; gap: 22px 32px; }
+  @media (max-width: 640px){ .skillgrid{ grid-template-columns: 1fr; } }
+  .skillgrp .g-label{ font-size: 11.5px; color: var(--ink-faint); margin-bottom: 8px; }
+  .skillgrp .g-label::before{ content:"$ "; color: var(--accent-dim); }
+  .taglist{ display:flex; flex-wrap:wrap; gap: 7px; }
+  .tag{ font-size: 12px; color: var(--ink-dim); border: 1px solid var(--rule-strong); padding: 4px 9px; }
+  .tag:hover{ border-color: var(--accent-dim); color: var(--ink); }
+
+  /* experience */
+  .xp{ padding: 20px 0; border-bottom: 1px solid var(--rule); }
+  .xp:first-child{ padding-top:0; }
+  .xp:last-child{ border-bottom:none; padding-bottom:0; }
+  .xp .when{ font-size: 11.5px; color: var(--ink-faint); margin-bottom: 6px; }
+  .xp h3{ font-size: 14.5px; margin: 0 0 4px 0; color: var(--ink); }
+  .xp .org{ font-size: 12.5px; color: var(--ink-dim); margin-bottom: 8px; }
+  .xp .meta{ display:flex; gap: 10px; align-items:center; font-size: 11.5px; }
+  .grade{ color: var(--accent); border: 1px solid var(--accent-dim); padding: 2px 7px; }
+  .cohort{ color: var(--ink-faint); }
+
+  /* projects */
+  .proj{ border: 1px solid var(--rule); padding: 22px; margin-bottom: 18px; background: var(--bg-panel); }
+  .proj:last-child{ margin-bottom:0; }
+  .proj-top{ display:flex; justify-content: space-between; align-items:baseline; gap: 14px; flex-wrap:wrap; margin-bottom: 8px; }
+  .proj h3{ font-size: 15px; margin:0; color: var(--ink); }
+  .proj a.repo{ font-size: 11.5px; color: var(--ink-faint); border-bottom: 1px dotted var(--ink-faint); }
+  .proj a.repo:hover{ color: var(--accent); border-color: var(--accent); }
+  .proj p{ font-size: 13px; color: var(--ink-dim); margin: 0 0 12px 0; max-width: 60ch; }
+  .proj .stack{ font-size: 11.5px; color: var(--ink-faint); }
+  .proj .stack span{ color: var(--accent-dim); }
+
+  /* certifications */
+  .cert{ display:flex; justify-content: space-between; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--rule); font-size: 13px; }
+  .cert:first-child{ padding-top:0; }
+  .cert:last-child{ border-bottom:none; padding-bottom:0; }
+  .cert .cname{ color: var(--ink); }
+  .cert .cissuer{ color: var(--ink-faint); font-size: 11.5px; white-space:nowrap; text-align:right; }
+
+  /* footer */
+  footer{ padding: 40px 0 60px 0; border-top: 1px solid var(--rule); }
+  .readout{
+    display:flex; flex-wrap: wrap; gap: 18px;
+    font-size: 11.5px; color: var(--ink-faint);
+    padding: 14px 18px; border: 1px solid var(--rule); margin-bottom: 28px;
+    background: var(--bg-panel);
+  }
+  .readout span b{ color: var(--accent); font-weight: 500; }
+  .foot-row{ display:flex; justify-content: space-between; align-items:center; flex-wrap: wrap; gap: 14px; }
+  .foot-links{ display:flex; gap: 18px; }
+  .foot-links a{ font-size: 12px; color: var(--ink-dim); border-bottom: 1px dotted var(--ink-faint); }
+  .foot-links a:hover{ color: var(--accent); border-color: var(--accent); }
+  .sig{ font-size: 12px; color: var(--ink-faint); }
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="inner">
+    <div class="brand">parth<span>@</span>sachdeva</div>
+    <div class="links">
+      <a href="#education">education</a>
+      <a href="#skills">skills</a>
+      <a href="#experience">experience</a>
+      <a href="#projects">projects</a>
+      <a href="#certifications">certs</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <header class="hero">
+    <p class="kicker">portfolio — build 2026</p>
+    <h1>Computer Science student <span class="dim">who ships working software,</span> not just coursework.</h1>
+    <p class="lede">B.Tech CS at Galgotias University, expected 2027 — DSA, web technology, and two AICTE-EduSkills virtual internships behind two shipped projects. One student, hands on every layer.</p>
+    <div class="cta-row">
+      <a class="btn primary" href="#projects">View projects</a>
+      <a class="btn" href="mailto:parth02sach@gmail.com">Email me</a>
+      <a class="btn" href="https://github.com/Parthsach" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+  </header>
+
+  <div class="doors">
+    <div class="door">
+      <div class="idx">01</div>
+      <h3>The projects</h3>
+      <p>Citizen Connect and BrandCrafters — built, not just described.</p>
+    </div>
+    <div class="door">
+      <div class="idx">02</div>
+      <h3>The internships</h3>
+      <p>Cybersecurity and Android development, AICTE EduSkills, 10 weeks each.</p>
+    </div>
+    <div class="door">
+      <div class="idx">03</div>
+      <h3>The fundamentals</h3>
+      <p>DSA, OOP, DBMS, OS — 100+ problems solved on LeetCode.</p>
+    </div>
+  </div>
+
+  <section class="section" id="education">
+    <div class="section-head">
+      <span class="num">01</span>
+      <h2>education</h2>
+      <span class="count">cgpa 8.14</span>
+    </div>
+    <div class="row">
+      <div>
+        <div class="main">Galgotias University</div>
+        <div class="sub">B.Tech in Computer Science · CGPA 8.14</div>
+      </div>
+      <div class="when">expected 2027</div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="main">Asha Modern School</div>
+        <div class="sub">Senior Secondary (CBSE) · 74%</div>
+      </div>
+      <div class="when">2023</div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="main">Asha Modern School</div>
+        <div class="sub">Matriculation (CBSE) · 93.66%</div>
+      </div>
+      <div class="when">2021</div>
+    </div>
+  </section>
+
+  <section class="section" id="skills">
+    <div class="section-head">
+      <span class="num">02</span>
+      <h2>skills</h2>
+      <span class="count">6 groups</span>
+    </div>
+    <div class="skillgrid">
+      <div class="skillgrp">
+        <div class="g-label">languages</div>
+        <div class="taglist"><span class="tag">Python</span><span class="tag">Java</span></div>
+      </div>
+      <div class="skillgrp">
+        <div class="g-label">core</div>
+        <div class="taglist"><span class="tag">Data Structures</span><span class="tag">Algorithms</span><span class="tag">OOP</span><span class="tag">DBMS</span><span class="tag">OS</span></div>
+      </div>
+      <div class="skillgrp">
+        <div class="g-label">database</div>
+        <div class="taglist"><span class="tag">MySQL</span><span class="tag">SQL</span></div>
+      </div>
+      <div class="skillgrp">
+        <div class="g-label">web</div>
+        <div class="taglist"><span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">JavaScript</span><span class="tag">REST APIs</span></div>
+      </div>
+      <div class="skillgrp">
+        <div class="g-label">tools</div>
+        <div class="taglist"><span class="tag">GitHub</span><span class="tag">VS Code</span><span class="tag">Postman</span></div>
+      </div>
+      <div class="skillgrp">
+        <div class="g-label">practice</div>
+        <div class="taglist"><span class="tag">100+ DSA problems on LeetCode</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="experience">
+    <div class="section-head">
+      <span class="num">03</span>
+      <h2>experience</h2>
+      <span class="count">2 internships</span>
+    </div>
+    <div class="xp">
+      <div class="when">jul – sep 2025 · 10 weeks</div>
+      <h3>Android Developer Virtual Internship</h3>
+      <div class="org">AICTE EduSkills · supported by Google for Developers</div>
+      <div class="meta"><span class="cohort">cohort 13</span><span class="grade">grade E</span></div>
+    </div>
+    <div class="xp">
+      <div class="when">jul – sep 2024 · 10 weeks</div>
+      <h3>Cybersecurity Virtual Internship</h3>
+      <div class="org">AICTE EduSkills · supported by Palo Alto Networks</div>
+      <div class="meta"><span class="cohort">cohort 8</span><span class="grade">grade B</span></div>
+    </div>
+  </section>
+
+  <section class="section" id="projects">
+    <div class="section-head">
+      <span class="num">04</span>
+      <h2>projects</h2>
+      <span class="count">2 shipped</span>
+    </div>
+    <div class="proj">
+      <div class="proj-top">
+        <h3>Citizen Connect Website</h3>
+        <a class="repo" href="https://github.com/Parthsach/citizen-connect-website" target="_blank" rel="noopener">github.com/Parthsach/citizen-connect-website ↗</a>
+      </div>
+      <p>Responsive platform for citizens to submit complaints and access government services — REST-API-backed request tracking, client-side form validation.</p>
+      <div class="stack"><span>stack:</span> HTML · CSS · JavaScript · REST APIs</div>
+    </div>
+    <div class="proj">
+      <div class="proj-top">
+        <h3>BrandCrafters</h3>
+        <a class="repo" href="https://github.com/Parthsach/brandcrafters" target="_blank" rel="noopener">github.com/Parthsach/brandcrafters ↗</a>
+      </div>
+      <p>Frontend for a freelancer–client marketplace — responsive interface, clearer navigation flow, reusable UI components.</p>
+      <div class="stack"><span>stack:</span> HTML · CSS · JavaScript</div>
+    </div>
+  </section>
+
+  <section class="section" id="certifications">
+    <div class="section-head">
+      <span class="num">05</span>
+      <h2>certifications</h2>
+      <span class="count">7 earned</span>
+    </div>
+    <div class="cert"><span class="cname">Cybersecurity Virtual Internship</span><span class="cissuer">AICTE EduSkills / Palo Alto Networks</span></div>
+    <div class="cert"><span class="cname">Android Developer Virtual Internship</span><span class="cissuer">AICTE EduSkills / Google for Developers</span></div>
+    <div class="cert"><span class="cname">AWS Academy Graduate — Cloud Foundations</span><span class="cissuer">AWS Academy</span></div>
+    <div class="cert"><span class="cname">AWS Academy Graduate — Cloud Architecting</span><span class="cissuer">AWS Academy</span></div>
+    <div class="cert"><span class="cname">100 Days of Python — Advance</span><span class="cissuer">GUVI</span></div>
+    <div class="cert"><span class="cname">100 Days of Python — Expert</span><span class="cissuer">GUVI</span></div>
+    <div class="cert"><span class="cname">C Programming</span><span class="cissuer">GUVI</span></div>
+  </section>
+
+  <footer>
+    <div class="readout" id="readout">
+      <span>rendered in <b id="rt">…</b>ms</span>
+      <span>viewport <b id="vp">…</b></span>
+      <span>loaded <b id="dt">…</b></span>
+    </div>
+    <div class="foot-row">
+      <span class="sig">parth sachdeva, 2026</span>
+      <div class="foot-links">
+        <a href="mailto:parth02sach@gmail.com">email</a>
+        <a href="https://github.com/Parthsach" target="_blank" rel="noopener">github</a>
+        <a href="#" target="_blank" rel="noopener">linkedin</a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  window.addEventListener('load', function(){
+    try{
+      var nav = performance.getEntriesByType('navigation')[0];
+      var ms = nav ? Math.round(nav.duration) : Math.round(performance.now());
+      document.getElementById('rt').textContent = ms;
+    }catch(e){
+      document.getElementById('rt').textContent = Math.round(performance.now());
+    }
+    document.getElementById('vp').textContent = window.innerWidth + '×' + window.innerHeight;
+    var d = new Date();
+    document.getElementById('dt').textContent = d.toISOString().slice(0,16).replace('T',' ') + ' utc';
+  });
+</script>
+
+</body>
+</html>
